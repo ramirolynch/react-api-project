@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Streams } from "../Models/Stream";
-import { getStreamResponse, getTop } from "../Service/TwitchApi";
+import { Stream, Streams } from "../Models/Stream";
+import { getStreamResponse } from "../Service/TwitchApi";
 import { SearchResults } from "./SearchResults";
 
 
 export function Main() {
 
-    const[streams, setStreams] = useState<Streams[]>([]);
+    const[streams, setStreams] = useState<Stream[]>([]);
     const [searchTerm, setSearchTerm]= useState('')
     
    
-    
-           useEffect(() =>{
+    useEffect(()=>{ 
+        
+    getStreamResponse().then(response => setStreams(response.data));
+             
+
+    },[])
    
-               if (searchTerm === ''){
-                getStreamResponse().then(response => setStreams(response.data));
-               } else {
-                    getTop().then(response => setStreams(response.data))
-    
-               }
-   
-           }, [searchTerm]);
+      
     
    
        

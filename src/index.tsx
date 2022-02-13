@@ -6,10 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {SearchPage} from './Components/SearchPage';
 import { FavoritesPage } from './Components/FavoritesPage';
+import { StreamContextProvider } from './Context/StreamsContextProvider';
 
 
 ReactDOM.render(
   <React.StrictMode>
+    <StreamContextProvider>
     <BrowserRouter>
       <App />
       <Routes>
@@ -19,6 +21,7 @@ ReactDOM.render(
         
       </Routes>
     </BrowserRouter>
+    </StreamContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

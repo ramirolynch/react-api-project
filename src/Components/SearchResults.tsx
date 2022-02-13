@@ -6,19 +6,17 @@ import { Stream } from "../Models/Stream";
 export function SearchResults(props: {stream:Stream[]}) {
 
 
-    
-
-
-
 
     return (
     <div>
-            {/* <p>   {props.stream.user_id}</p> 
-               <p>Thumbnail:  <img src={} /></p>  */}
 
-            
-            
+        {/* <ul>
+            <li>{props.stream.user_id}</li> 
+            <li>{props.stream.}</li> 
+            <li>Thumbnail:  <img src={} /></li> 
 
+        </ul>
+       */}
     </div>
         
     );
