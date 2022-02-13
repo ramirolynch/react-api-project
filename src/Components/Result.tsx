@@ -8,10 +8,11 @@ export function Result(props:{stream:Stream}) {
 
     return (
         <div>
-            <ul><li>This is one result</li>
+            <ul>
                 <li>User name: {props.stream.user_name}</li> 
                 <li>Channel title: {props.stream.title}</li> 
-                { props.stream.thumbnail_url.length > 0 ? <li>Channel Thumbnail:<img src={props.stream.thumbnail_url}/></li> : <li>There is no thumbnail</li> }
+               <li>Channel's viewer count: {props.stream.viewer_count}</li>
+               <li><img src={(props.stream.thumbnail_url).replace('{width}', '250').replace('{height}', '141')}/></li>
             </ul>
         
         </div>
