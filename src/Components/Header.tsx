@@ -14,7 +14,7 @@ export function Header() {
     return (
 
         <div>
-            Twitch Clone
+            Twitch App
             <SearchBar onSubmit={setSearch}></SearchBar>
         </div>
     );

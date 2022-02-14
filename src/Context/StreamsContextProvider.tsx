@@ -1,6 +1,6 @@
 import {  ReactNode, useEffect, useState } from "react";
 import { isTemplateSpan } from "typescript";
-import { Stream, Streams } from "../Models/Stream";
+import { Channel, Game, Games, Searched, Stream, Streams } from "../Models/Stream";
 import { StreamContext } from "../Context/StreamsContext";
 import { getStreamResponse, getTop } from "../Service/TwitchApi";
 import axios from "axios";
@@ -16,6 +16,7 @@ export function StreamContextProvider({children}:Props) {
 
     const [streamList, setStreamList] = useState<Stream[]>([]);
 
+
     function fetchStreams() {
         axios.get<Streams>(`https://api.twitch.tv/helix/streams`, {
             headers: {
@@ -25,8 +26,22 @@ export function StreamContextProvider({children}:Props) {
             .then(response =>setStreamList(response.data.data))
     }
 
+    const [gamesList, setGamesList] = useState<Game[]>([]);
+
+    function fetchGames() {
+        axios.get<Games>(`https://api.twitch.tv/helix/games/top`, {
+            headers : {
+                'Authorization': `Bearer ${accessToken}`,
+                'Client-Id': `${clientID}`
+            }
+        })
+        .then(response =>setGamesList(response.data.data))
+    } 
+
     useEffect(()=> {
         fetchStreams();
+        fetchGames();
+        searchChannels();
     },[]);
 
     const [favorites, setFavorites] = useState<Stream[]>([])
@@ -40,9 +55,34 @@ export function StreamContextProvider({children}:Props) {
     
     }
 
+    const [searchTerm, setSearchTerm] = useState('')
+
+    function setSearch(str:string) {
+        setSearchTerm(str)
+        console.log(str)
+    }
+
+    const [channelList, setChannels] = useState<Channel[]>([]);
+
+    function setChannel(channel:Channel[]) {
+        setChannels(channel)
+    }
+
+    function searchChannels(){
+
+        return axios.get<Searched>(`https://api.twitch.tv/helix/search/channels`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Client-Id': `${clientID}`,
+                'query': searchTerm,
+            }
+        })
+        .then(response=>setChannels(response.data.data))
+    }
+
     return (
 
-        <StreamContext.Provider value={{ streamList, favorites, addFave, removeFave}}>
+        <StreamContext.Provider value={{ channelList, setChannel, searchTerm, setSearch, gamesList, streamList, favorites, addFave, removeFave}}>
             {children}
         </StreamContext.Provider>  
     );

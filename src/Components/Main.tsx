@@ -31,9 +31,9 @@ export function Main() {
 
         <div>
             <NavLink to='/'>Search</NavLink>
+            <NavLink to='/topgames'>Top Games</NavLink>
             <NavLink to='/Favorites'>Favorites</NavLink>
-
-            
+    
         </div>
     );
 }

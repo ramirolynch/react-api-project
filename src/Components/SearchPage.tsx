@@ -1,22 +1,32 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { StreamContext } from "../Context/StreamsContext";
-import { Stream, Streams } from  "../Models/Stream";
-import { getStreamResponse } from "../Service/TwitchApi";
+import { Channel, Searched } from "../Models/Stream";
+import { searchChannel } from "../Service/TwitchApi";
+import { ChannelSearched } from "./Channel";
 import { Result } from "./Result";
 
 
 
 export function SearchPage() {
 
-     const { streamList} = useContext(StreamContext)
+     const {searchTerm, channelList, streamList } = useContext(StreamContext)
+
+     
+
+    //  useEffect(() => {
+    //      if (searchTerm !== '') {            
+    //      searchChannel(searchTerm).then(response =>setChannels(response.data))
+    //  }},[searchTerm])
+
+
+    // channels.map(channel => <ChannelSearched key={channel.id} channel={channel}></ChannelSearched>) 
 
 
        return(
    
            <div>
 
-            { streamList.map(stream => <Result key={stream.user_id} stream={stream}></Result>)}
+            { channelList.length > 0 ? channelList.map(channel => <ChannelSearched key={channel.id} channel={channel}></ChannelSearched>)  : streamList.map((stream, i)=> <Result key={i} stream={stream}></Result>) }
               
            </div>
    

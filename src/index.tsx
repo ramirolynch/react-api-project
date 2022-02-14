@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {SearchPage} from './Components/SearchPage';
 import { FavoritesPage } from './Components/FavoritesPage';
 import { StreamContextProvider } from './Context/StreamsContextProvider';
+import { TopGames } from './Components/TopGames';
 
 
 ReactDOM.render(
@@ -17,6 +18,7 @@ ReactDOM.render(
       <Routes>
         <Route path='/' element={<SearchPage/>}/>
         <Route path='/Favorites' element={<FavoritesPage/>}/>
+        <Route path='/topgames' element={<TopGames/>}/>
         <Route path='*' element={<Navigate to="/"/>}/>
         
       </Routes>
