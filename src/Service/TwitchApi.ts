@@ -27,7 +27,7 @@ export function getTop() {
                 .then(response => response.data);
 }
 
-export function searchChannel(searchTerm:string){
+export function searchChannels(searchTerm:string){
 
     return axios.get<Searched>(`https://api.twitch.tv/helix/search/channels`, {
         headers: {
@@ -36,5 +36,5 @@ export function searchChannel(searchTerm:string){
             'query': searchTerm,
         }
     })
-    .then(response=>response.data)
+    .then(response=> response.data)
 }
